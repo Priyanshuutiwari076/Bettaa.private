@@ -28,7 +28,7 @@
 
     /* Falling Stars */
     .falling-star {
-      position: absolute;
+      position: fixed;
       background: white;
       border-radius: 50%;
       filter: blur(1px);
@@ -215,23 +215,41 @@
     .message::before {
       content: '';
       position: absolute;
-      top: -10px;
-      left: -10px;
-      right: -10px;
-      bottom: -10px;
-      background: linear-gradient(45deg, #ff80ab, #e91e63, #ff80ab);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(255,128,171,0.1), rgba(233,30,99,0.1), rgba(255,128,171,0.1));
       z-index: -1;
       background-size: 200% 200%;
-      animation: gradientBG 3s ease infinite;
-      border-radius: 20px;
-      filter: blur(5px);
-      opacity: 0.5;
+      animation: gradientBG 5s ease infinite;
+      border-radius: 15px;
+    }
+
+    .message::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      border: 2px solid transparent;
+      border-image: linear-gradient(45deg, #ff80ab, #e91e63, #ff80ab);
+      border-image-slice: 1;
+      border-radius: 15px;
+      animation: borderPulse 3s ease infinite;
+      pointer-events: none;
     }
 
     @keyframes gradientBG {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
+    }
+
+    @keyframes borderPulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
     }
 
     .final-message {
@@ -328,12 +346,15 @@
       <div class="message">
         <p>Hi Betta 💕,</p>
         <p>Shayad tu naraz hai... door hai... lekin tu meri duniya hai 🌎. Tere bina har din adhoora lagta hai. Main chahta hoon ki tu wapas aaye, aur phir kabhi na jaaye ♾️.</p>
-        <p>Tu sirf meri nahi... meri jaan hai ❤️. Tu meri muskurahat, meri har dua ka jawab hai. Betta, main humesha tera sath chahta hoon 🫂.</p>
-        <p>Har pal main tujhme jeeta hoon... aur har lamha tujhe yaad karta hoon. Mujhe maaf kar de agar kabhi dukh diya ho 🧿, lekin itna toh jaane – main tujhe dil se, bina kisi shart ke pyaar karta hoon 💕.</p>
+        <p>Tu sirf meri girlfriend hi nahi... meri jaan hai ❤️. Tu meri muskurahat, meri har dua ka  hai. main humesha tera sath chahta hoon 🫂.</p>
+        <p>Har pal main tujhme jeeta hoon... aur har lamha tujhe yaad karta hoon. Mujhe maaf kar de agar kabhi dukh diya ho 🧿, but – main tujhe dil se, unconditionally pyaar karta hoon 💕.</p>
         <div class="signature">Your Betuuu 💕</div>
       </div>
       <img src="Photo2.jpg" alt="Tum dono" class="photo" />
       <p class="final-message">I miss you so muchh betta 😢🫂 jaldi waps aaja</p>
+      <audio id="bg-music" autoplay loop>
+        <source src="Meherbaan_intro.mp3" type="audio/mpeg" />
+      </audio>
     </div>
   </div>
 
@@ -375,8 +396,9 @@
       const heartContainer = document.getElementById("heartContainer");
       const content = document.getElementById("content");
       const unlockButton = document.getElementById("unlockButton");
+      const bgMusic = document.getElementById("bg-music");
 
-      if (!input || !passwordBox || !heartContainer || !content || !unlockButton) {
+      if (!input || !passwordBox || !heartContainer || !content || !unlockButton || !bgMusic) {
         console.error("Error: One or more elements not found");
         alert("Error: Page elements missing. Please check console or refresh the page.");
         return;
@@ -398,6 +420,10 @@
           const glow = document.createElement('div');
           glow.classList.add('unlocked-glow');
           document.body.appendChild(glow);
+          
+          // Start playing music quietly
+          bgMusic.volume = 0.3;
+          bgMusic.play().catch(e => console.log("Autoplay prevented:", e));
         } else {
           console.log("Wrong password");
           alert("Wrong password. Try again.");
@@ -416,6 +442,9 @@
         
         // Create more stars after unlock
         createStars();
+        
+        // Ensure music plays after user interaction
+        bgMusic.play().catch(e => console.log("Play prevented:", e));
       };
 
       // Button click
@@ -427,6 +456,13 @@
         if (e.key === "Enter") {
           e.preventDefault();
           checkPassword();
+        }
+      });
+
+      // Handle visibility change to resume music
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden && bgMusic.paused) {
+          bgMusic.play().catch(e => console.log("Resume prevented:", e));
         }
       });
 
