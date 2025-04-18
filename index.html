@@ -2,63 +2,54 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A personal heartfelt message for someone special." />
+  <meta name="robots" content="noindex" /> <!-- Prevent search engine indexing for privacy -->
   <title>Private - Betta Ke Liye</title>
   <style>
+    * {
+      box-sizing: border-box; /* Ensures padding/margins don't break layout */
+    }
+
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0b0c2a;
       color: #fce4ec;
       position: relative;
       min-height: 100vh;
-      overflow: hidden;
-      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      overflow-x: hidden; /* Prevent horizontal scroll */
     }
 
-    /* Galaxy Stars */
-    .stars, .twinkling, .moon {
+    /* Star background */
+    body::before,
+    body::after {
+      content: '';
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      display: block;
+      width: 200%;
+      height: 200%;
+      background: transparent;
+      top: -50%;
+      left: -50%;
       z-index: 0;
+      background-image: radial-gradient(#fff 1px, transparent 1px);
+      background-size: 2px 2px;
+      animation: starMove 200s linear infinite;
     }
 
-    .stars {
-      background: url('https://i.imgur.com/bAI8qVN.png') repeat;
-      animation: moveStars 200s linear infinite;
+    body::after {
+      background-size: 3px 3px;
+      opacity: 0.5;
+      animation-duration: 300s;
     }
 
-    .twinkling {
-      background: url('https://i.imgur.com/3jK5n7w.png') repeat;
-      animation: moveTwinkling 100s linear infinite;
-    }
-
-    .moon {
-      background: url('https://i.imgur.com/kq2VYKP.png') no-repeat;
-      background-size: 150px;
-      width: 150px;
-      height: 150px;
-      top: 30px;
-      right: 30px;
-      left: auto;
-      z-index: 0;
-      animation: floatMoon 10s ease-in-out infinite alternate;
-    }
-
-    @keyframes moveStars {
-      from { background-position: 0 0; }
-      to { background-position: -10000px 5000px; }
-    }
-
-    @keyframes moveTwinkling {
-      from { background-position: 0 0; }
-      to { background-position: 10000px 0; }
-    }
-
-    @keyframes floatMoon {
-      from { transform: translateY(0); }
-      to { transform: translateY(20px); }
+    @keyframes starMove {
+      0% {
+        transform: translate(0, 0);
+      }
+      100% {
+        transform: translate(100px, 100px);
+      }
     }
 
     .container {
@@ -68,6 +59,7 @@
       flex-direction: column;
       align-items: center;
       padding: 20px;
+      min-height: 100vh; /* Ensure container takes full height */
     }
 
     .password-box {
@@ -76,23 +68,42 @@
       animation: fadeIn 2s ease-in-out;
     }
 
+    h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #ffb3d9;
+    }
+
     input[type="password"] {
       padding: 12px;
       border-radius: 10px;
       border: none;
       width: 80%;
       max-width: 250px;
+      font-size: 16px;
+      background: #ffffffdd;
+      color: #333;
+    }
+
+    input[type="password"]::placeholder {
+      color: #777;
     }
 
     button {
-      margin-top: 10px;
-      padding: 10px 25px;
+      margin-top: 15px;
+      padding: 10px 30px;
       background-color: #e91e63;
       color: white;
       border: none;
       border-radius: 10px;
       cursor: pointer;
       font-weight: bold;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #c2185b; /* Darker shade on hover */
     }
 
     #content {
@@ -101,6 +112,7 @@
       align-items: center;
       animation: fadeIn 1.5s ease-in-out forwards;
       margin-top: 20px;
+      width: 100%;
     }
 
     h1 {
@@ -116,9 +128,10 @@
       width: 95%;
       max-width: 400px;
       border-radius: 20px;
-      box-shadow: 0 4px 15px rgba(255,255,255,0.2);
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
       margin: 20px 0;
       animation: zoomIn 1.2s ease-in-out;
+      display: block; /* Ensure images don't stretch */
     }
 
     .message {
@@ -129,7 +142,7 @@
       width: 95%;
       max-width: 600px;
       text-align: center;
-      box-shadow: 0 0 15px rgba(255,255,255,0.1);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
       animation: fadeInUp 1.4s ease-in-out;
     }
 
@@ -140,83 +153,105 @@
       font-size: 18px;
     }
 
-    .emotional {
-      margin-top: 20px;
-      font-size: 16px;
-      color: #ffe6f0;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 10px 15px;
-      border-radius: 12px;
-      text-align: center;
-      max-width: 90%;
-      backdrop-filter: blur(5px);
-    }
-
     audio {
       margin-top: 20px;
+      width: 80%;
+      max-width: 300px;
     }
 
     /* Animations */
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
 
     @keyframes slideIn {
-      from { transform: translateX(-100px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
+      from {
+        transform: translateX(-100px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
     }
 
     @keyframes zoomIn {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
 
     @keyframes fadeInUp {
-      from { transform: translateY(40px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+      from {
+        transform: translateY(40px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
-    /* Mobile optimization */
     @media screen and (max-width: 480px) {
-      h1 { font-size: 22px; }
-      .message { padding: 15px; font-size: 14px; }
-      .signature { font-size: 16px; }
+      h1 {
+        font-size: 22px;
+      }
+      h2 {
+        font-size: 20px;
+      }
+      .message {
+        padding: 15px;
+        font-size: 14px;
+      }
+      .signature {
+        font-size: 16px;
+      }
+      input[type="password"],
+      button {
+        width: 90%;
+        max-width: 220px;
+      }
     }
-
   </style>
 </head>
 <body>
-  <div class="stars"></div>
-  <div class="twinkling"></div>
-  <div class="moon"></div>
-
   <div class="container">
-    <div class="password-box">
+    <div class="password-box" id="passwordBox">
       <h2>Enter Password to Continue</h2>
-      <input type="password" id="passwordInput" placeholder="Enter password" />
+      <input
+        type="password"
+        id="passwordInput"
+        placeholder="Enter password"
+        autofocus
+        onkeydown="if(event.key === 'Enter') checkPassword()"
+      />
       <br />
       <button onclick="checkPassword()">Unlock</button>
     </div>
 
     <div id="content">
-      <h1>I lovee youu so muchh bettaaa 💕♾️</h1>
+      <h1>I lovee youu sooo muchh betttaa</h1>
       <img src="Photo1.jpg" alt="Uski yaad" class="photo" />
       <div class="message">
         <p>Hi Betta,</p>
-        <p>Shayad tu naraz hai... door hai... lekin tu meri duniya hai. ♾️🌎Tere bina har din adhoora lagta hai.🥲 Main chahta hoon ki tu wapas aaye, aur phir kabhi na jaaye♥️🫂.</p>
-        <p>Tu sirf meri girlfriend hi nahi... meri jaan hai. Tu meri muskurahat, meri har dua  hai. main humesha tera sath chahta hoon.</p>
-        <p>Har pal main tujhme jeeta hoon... aur har lamha tujhe yaad karta hoon. 💕❤️Mujhe maaf kar de agar kabhi dukh diya ho, But – main tujhe dil se, unconditionally pyaar karta hu💕🧿🫂.</p>
+        <p>Shayad tu naraz hai... door hai... lekin tu meri duniya hai. Tere bina har din adhoora lagta hai. Main chahta hoon ki tu wapas aaye, aur phir kabhi na jaaye.</p>
+        <p>Tu sirf meri nahi... meri jaan hai. Tu meri muskurahat, meri har dua ka jawab hai. Betta, main humesha tera sath chahta hoon.</p>
+        <p>Har pal main tujhme jeeta hoon... aur har lamha tujhe yaad karta hoon. Mujhe maaf kar de agar kabhi dukh diya ho, lekin itna toh jaane – main tujhe dil se, bina kisi shart ke pyaar karta hoon.</p>
         <div class="signature">Your Betuuu</div>
       </div>
       <img src="Photo2.jpg" alt="Tum dono" class="photo" />
-
-      <div class="emotional">
-        I miss you so much betta... please wapas aa ja... tera Betuuu bina tere adhura hai. 💖✨
-      </div>
-
-      <audio id="bg-music" loop autoplay>
-        <source src="Meherbaan_intro.mp3" type="audio/mpeg" />
+      <audio id="bg-music" controls loop>
+        <source src="Kaira.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
     </div>
@@ -224,16 +259,20 @@
 
   <script>
     function checkPassword() {
-      const input = document.getElementById("passwordInput").value;
-      if (input === "betta123") {
-        document.querySelector(".password-box").style.display = "none";
-        const content = document.getElementById("content");
+      const input = document.getElementById("passwordInput").value.trim();
+      const correctPassword = "7709826839"; // Consider storing this securely in a real app
+      const passwordBox = document.getElementById("passwordBox");
+      const content = document.getElementById("content");
+      const music = document.getElementById("bg-music");
+
+      if (input === correctPassword) {
+        passwordBox.style.display = "none";
         content.style.display = "flex";
-        document.getElementById("bg-music").play();
+        music.play().catch((e) => console.log("Audio play failed:", e)); // Handle autoplay restrictions
       } else {
         alert("Wrong password. Try again.");
+        document.getElementById("passwordInput").value = ""; // Clear input on wrong password
       }
     }
-  </script>
-</body>
-</html>
+
+    // Prevent form submission on Enter
