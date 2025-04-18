@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Private - Betta Ke Liye</title>
   <style>
     body {
@@ -21,6 +20,13 @@
     #content {
       display: none;
       text-align: center;
+      opacity: 0;
+      animation: fadeIn 2s ease-in forwards;
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
     }
     .photo {
       width: 90%;
@@ -65,14 +71,14 @@
 <body>
   <div class="password-box">
     <h2>Enter Password to Continue</h2>
-    <input type="password" id="passwordInput" placeholder="Enter password">
-    <br>
+    <input type="password" id="passwordInput" placeholder="Enter password" />
+    <br />
     <button onclick="checkPassword()">Unlock</button>
   </div>
 
   <div id="content">
     <h1>Tere Bina Sab Khaali Hai, Betta...</h1>
-    <img src="Photo1.jpg" alt="Uski yaad" class="photo">
+    <img src="Photo1.jpg" alt="Uski yaad" class="photo" />
     <div class="message">
       <p>Hi Betta,</p>
       <p>Shayad tu naraz hai... door hai... lekin tu meri duniya hai. Tere bina har din adhoora lagta hai. Main chahta hoon ki tu wapas aaye, aur phir kabhi na jaaye.</p>
@@ -80,9 +86,9 @@
       <p>Har pal main tujhme jeeta hoon... aur har lamha tujhe yaad karta hoon. Mujhe maaf kar de agar kabhi dukh diya ho, lekin itna toh jaane – main tujhe dil se, bina kisi shart ke pyaar karta hoon.</p>
       <div class="signature">Your Betuuu</div>
     </div>
-    <img src="Photo2.jpg" alt="Tum dono" class="photo">
-    <audio controls autoplay loop>
-      <source src="meherbaan_intro.mp3" type="audio/mpeg">
+    <img src="Photo2.jpg" alt="Tum dono" class="photo" />
+    <audio id="bg-music" loop>
+      <source src="Meherbaan_intro.mp3" type="audio/mpeg" />
       Your browser does not support the audio element.
     </audio>
   </div>
@@ -92,7 +98,12 @@
       var input = document.getElementById("passwordInput").value;
       if (input === "7709826839") {
         document.querySelector(".password-box").style.display = "none";
-        document.getElementById("content").style.display = "block";
+        const content = document.getElementById("content");
+        content.style.display = "block";
+        setTimeout(() => {
+          content.style.opacity = "1";
+        }, 100);
+        document.getElementById("bg-music").play();
       } else {
         alert("Wrong password. Try again.");
       }
