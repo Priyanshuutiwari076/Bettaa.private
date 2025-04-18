@@ -12,16 +12,23 @@
       position: relative;
       min-height: 100vh;
       overflow: hidden;
-      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-      background-repeat: no-repeat;
+      background: url('bg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      background-attachment: fixed;
+      animation: backgroundAnimation 20s infinite;
     }
 
-    /* Glowing Stars & Moon */
+    /* Animation for Background */
+    @keyframes backgroundAnimation {
+      0% { background-position: 0 0; }
+      50% { background-position: 50% 50%; }
+      100% { background-position: 0 0; }
+    }
+
     .stars, .twinkling, .moon {
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      display: block;
       z-index: 0;
     }
 
@@ -47,7 +54,7 @@
       animation: floatMoon 10s ease-in-out infinite alternate;
     }
 
-    /* Animation */
+    /* Keyframes for the background animations */
     @keyframes moveStars {
       from { background-position: 0 0; }
       to { background-position: -10000px 5000px; }
@@ -63,43 +70,120 @@
       to { transform: translateY(20px); }
     }
 
-    /* Magic Open Effects */
-    .content {
-      display: none;
-      text-align: center;
+    .container {
+      position: relative;
       z-index: 1;
-      margin-top: 30px;
-      font-size: 1.2em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
     }
 
-    .reveal {
-      display: inline-block;
-      background-color: transparent;
-      border: 2px solid #fff;
+    .password-box {
+      text-align: center;
+      margin-top: 100px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    input[type="password"] {
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      width: 80%;
+      max-width: 250px;
+    }
+
+    button {
+      margin-top: 10px;
       padding: 10px 25px;
+      background-color: #e91e63;
+      color: white;
+      border: none;
       border-radius: 10px;
       cursor: pointer;
-      color: #fff;
       font-weight: bold;
-      animation: glow 1.5s ease-in-out infinite alternate;
     }
 
-    @keyframes glow {
-      0% { text-shadow: 0 0 10px #ff80ab, 0 0 20px #ff80ab, 0 0 30px #ff80ab; }
-      100% { text-shadow: 0 0 20px #ff80ab, 0 0 40px #ff80ab, 0 0 60px #ff80ab; }
+    #content {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 1.5s ease-in-out forwards;
+      margin-top: 20px;
     }
 
-    .heart {
-      font-size: 50px;
-      color: #ff80ab;
-      animation: heartbeat 1s infinite;
-      cursor: pointer;
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      margin: 20px 10px;
+      animation: slideIn 1.2s ease-in-out;
+      color: #ffb3d9;
+      text-shadow: 0 0 10px #ff80ab;
     }
 
-    @keyframes heartbeat {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
+    .photo {
+      width: 95%;
+      max-width: 400px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(255,255,255,0.2);
+      margin: 20px 0;
+      animation: zoomIn 1.2s ease-in-out;
+    }
+
+    .message {
+      background: rgba(255, 240, 246, 0.9);
+      color: #4a1c32;
+      border-radius: 15px;
+      padding: 20px;
+      width: 95%;
+      max-width: 600px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(255,255,255,0.1);
+      animation: fadeInUp 1.4s ease-in-out;
+    }
+
+    .signature {
+      margin-top: 15px;
+      font-weight: bold;
+      font-style: italic;
+      font-size: 18px;
+    }
+
+    .emotional {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #ffe6f0;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px 15px;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 90%;
+      backdrop-filter: blur(5px);
+    }
+
+    audio {
+      margin-top: 20px;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(-100px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     /* Mobile optimization */
@@ -123,34 +207,23 @@
       <button onclick="checkPassword()">Unlock</button>
     </div>
 
-    <!-- Hidden Content, Revealed After Password -->
-    <div id="content" class="content">
-      <h1>I lovee you so muchh bettaaa 💕♾️</h1>
+    <div id="content">
+      <h1>I lovee youu so muchh bettaaa 💕♾️</h1>
+      <img src="Photo1.jpg" alt="Uski yaad" class="photo" />
+      <div class="message">
+        <p>Hi Betta,</p>
+        <p>Shayad tu naraz hai... door hai... lekin tu meri duniya hai. Tere bina har din adhoora lagta hai. Main chahta hoon ki tu wapas aaye, aur phir kabhi na jaaye.</p>
+        <p>Tu sirf meri nahi... meri jaan hai. Tu meri muskurahat, meri har dua ka jawab hai. Betta, main humesha tera sath chahta hoon.</p>
+        <p>Har pal main tujhme jeeta hoon... aur har lamha tujhe yaad karta hoon. Mujhe maaf kar de agar kabhi dukh diya ho, lekin itna toh jaane – main tujhe dil se, bina kisi shart ke pyaar karta hoon.</p>
+        <div class="signature">Your Betuuu</div>
+      </div>
+      <img src="Photo2.jpg" alt="Tum dono" class="photo" />
 
-      <!-- Magic Reveal Button -->
-      <div class="reveal" onclick="revealContent()">Click to Reveal My Heart 💖</div>
-
-      <!-- Hidden Content (Images, Message, etc.) -->
-      <div id="hiddenContent" style="display: none;">
-        <img src="Photo1.jpg" alt="Uski yaad" class="photo" />
-        <div class="message">
-          <p>Hi Betta 💕,</p>
-          <p>Shayad tu naraz hai... door hai... lekin tu meri duniya hai. Tere bina har din adhoora lagta hai. Main chahta hoon ki tu wapas aaye, aur phir kabhi na jaaye.</p>
-          <p>Tu sirf meri nahi... meri jaan hai. Tu meri muskurahat, meri har dua ka jawab hai. Betta, main humesha tera sath chahta hoon.</p>
-          <p>Har pal main tujhme jeeta hoon... aur har lamha tujhe yaad karta hoon. Mujhe maaf kar de agar kabhi dukh diya ho, lekin itna toh jaane – main tujhe dil se, bina kisi shart ke pyaar karta hoon.</p>
-          <div class="signature">Your Betuuu</div>
-        </div>
-        <img src="Photo2.jpg" alt="Tum dono" class="photo" />
+      <div class="emotional">
+        I miss you so much betta... please wapas aa ja... tera Betuuu bina tere adhura hai. 💖😭
       </div>
 
-      <div class="heart" onclick="revealHeart()">❤️</div>
-
-      <div class="miss-you-msg">
-        <h2>I miss you so much, bettaa 💕😭</h2>
-        <p>Jaldi aajaa, sab kuch adhura hai teri bina. 💖💫</p>
-      </div>
-
-      <audio id="bg-music" loop autoplay>
+      <audio id="bg-music" loop>
         <source src="Meherbaan_intro.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
@@ -162,19 +235,12 @@
       const input = document.getElementById("passwordInput").value;
       if (input === "7709826839") {
         document.querySelector(".password-box").style.display = "none";
-        document.getElementById("content").style.display = "block";
+        const content = document.getElementById("content");
+        content.style.display = "flex";
         document.getElementById("bg-music").play();
       } else {
         alert("Wrong password. Try again.");
       }
-    }
-
-    function revealContent() {
-      document.getElementById("hiddenContent").style.display = "block";
-    }
-
-    function revealHeart() {
-      alert("You're my heart, Betta! ❤️");
     }
   </script>
 </body>
