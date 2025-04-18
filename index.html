@@ -6,12 +6,13 @@
   <meta name="description" content="A personal heartfelt message for someone special." />
   <meta name="robots" content="noindex" />
   <title>Private - Betta Ke Liye</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #0b0c2a url('bg.jpg') no-repeat center center/cover;
+      font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0b0c2a url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=1471&auto=format&fit=crop') no-repeat center center/cover;
       color: #fce4ec;
       position: relative;
       min-height: 100vh;
@@ -25,33 +26,24 @@
       50% { filter: brightness(1.2); }
     }
 
-    /* Star Background */
-    body::before, body::after {
-      content: '';
+    /* Falling Stars */
+    .falling-star {
       position: absolute;
-      width: 200%;
-      height: 200%;
-      background: transparent;
-      top: -50%;
-      left: -50%;
-      z-index: 0;
-      background-image: radial-gradient(#fff 1px, transparent 1px);
-      background-size: 2px 2px;
-      animation: starMove 200s linear infinite;
+      background: white;
+      border-radius: 50%;
+      filter: blur(1px);
+      animation: falling linear infinite;
+      z-index: 1;
     }
-    body::after {
-      background-size: 3px 3px;
-      opacity: 0.5;
-      animation-duration: 300s;
-    }
-    @keyframes starMove {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(100px, 100px); }
+    
+    @keyframes falling {
+      0% { transform: translateY(-100px) translateX(0); opacity: 1; }
+      100% { transform: translateY(100vh) translateX(100px); opacity: 0; }
     }
 
     .container {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -125,7 +117,7 @@
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.7);
-      z-index: 2;
+      z-index: 3;
       justify-content: center;
       align-items: center;
     }
@@ -190,6 +182,7 @@
       animation: slideIn 1.2s ease-in-out;
       color: #ffb3d9;
       text-shadow: 0 0 10px #ff80ab;
+      font-family: 'Dancing Script', cursive;
     }
 
     .photo {
@@ -200,6 +193,7 @@
       margin: 20px 0;
       animation: zoomIn 1.2s ease-in-out;
       display: block;
+      border: 2px solid #ff80ab;
     }
 
     .message {
@@ -213,6 +207,31 @@
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
       animation: fadeInUp 1.4s ease-in-out;
       font-size: 16px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #ffb3d9;
+    }
+
+    .message::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: linear-gradient(45deg, #ff80ab, #e91e63, #ff80ab);
+      z-index: -1;
+      background-size: 200% 200%;
+      animation: gradientBG 3s ease infinite;
+      border-radius: 20px;
+      filter: blur(5px);
+      opacity: 0.5;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .final-message {
@@ -223,6 +242,7 @@
       margin: 20px 0;
       text-shadow: 0 0 5px #ff80ab;
       animation: fadeInUp 1.6s ease-in-out;
+      font-family: 'Dancing Script', cursive;
     }
 
     .signature {
@@ -230,12 +250,25 @@
       font-weight: bold;
       font-style: italic;
       font-size: 18px;
+      font-family: 'Dancing Script', cursive;
     }
 
-    audio {
-      margin-top: 20px;
-      width: 80%;
-      max-width: 300px;
+    /* Glow effect after unlock */
+    .unlocked-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(255,128,171,0.2) 0%, rgba(255,128,171,0) 70%);
+      pointer-events: none;
+      z-index: 1;
+      animation: pulseGlow 3s ease infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.1); }
     }
 
     @keyframes fadeIn {
@@ -301,10 +334,6 @@
       </div>
       <img src="Photo2.jpg" alt="Tum dono" class="photo" />
       <p class="final-message">I miss you so muchh betta 😢🫂 jaldi waps aaja</p>
-      <audio id="bg-music" controls loop>
-        <source src="Meherbaan_intro.mp3" type="audio/mpeg" />
-        Your browser does not support the audio element.
-      </audio>
     </div>
   </div>
 
@@ -312,15 +341,42 @@
     window.onload = function () {
       console.log("Page loaded, script initialized");
 
+      // Create falling stars
+      function createStars() {
+        const starsCount = 50;
+        for (let i = 0; i < starsCount; i++) {
+          const star = document.createElement('div');
+          star.classList.add('falling-star');
+          
+          // Random size between 1-3px
+          const size = Math.random() * 2 + 1;
+          star.style.width = `${size}px`;
+          star.style.height = `${size}px`;
+          
+          // Random position
+          star.style.left = `${Math.random() * 100}vw`;
+          
+          // Random animation duration between 5-15s
+          const duration = Math.random() * 10 + 5;
+          star.style.animationDuration = `${duration}s`;
+          
+          // Random delay
+          star.style.animationDelay = `${Math.random() * 5}s`;
+          
+          document.body.appendChild(star);
+        }
+      }
+      
+      createStars();
+
       // Check if elements exist
       const input = document.getElementById("passwordInput");
       const passwordBox = document.getElementById("passwordBox");
       const heartContainer = document.getElementById("heartContainer");
       const content = document.getElementById("content");
-      const music = document.getElementById("bg-music");
       const unlockButton = document.getElementById("unlockButton");
 
-      if (!input || !passwordBox || !heartContainer || !content || !music || !unlockButton) {
+      if (!input || !passwordBox || !heartContainer || !content || !unlockButton) {
         console.error("Error: One or more elements not found");
         alert("Error: Page elements missing. Please check console or refresh the page.");
         return;
@@ -337,6 +393,11 @@
           console.log("Password correct, showing heart animation...");
           passwordBox.style.display = "none";
           heartContainer.style.display = "flex";
+          
+          // Add glow effect to body
+          const glow = document.createElement('div');
+          glow.classList.add('unlocked-glow');
+          document.body.appendChild(glow);
         } else {
           console.log("Wrong password");
           alert("Wrong password. Try again.");
@@ -352,10 +413,9 @@
         console.log("Heart clicked, revealing content...");
         heartContainer.style.display = "none";
         content.style.display = "flex";
-        music.play().catch((e) => {
-          console.warn("Audio play failed:", e);
-          alert("Audio couldn't play automatically. Use the audio controls.");
-        });
+        
+        // Create more stars after unlock
+        createStars();
       };
 
       // Button click
