@@ -1,93 +1,201 @@
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #fce4ec;
-  position: relative;
-  min-height: 100vh;
-  overflow: hidden;
-  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Private - Betta Ke Liye</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fce4ec;
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    }
 
-.stars, .twinkling, .moon {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: 0;
-}
+    /* Galaxy Stars */
+    .stars, .twinkling, .moon {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+    }
 
-.stars {
-  background: url('https://i.imgur.com/bAI8qVN.png') repeat;
-  animation: moveStars 200s linear infinite;
-  filter: blur(1px);
-}
+    .stars {
+      background: url('https://i.imgur.com/bAI8qVN.png') repeat;
+      animation: moveStars 200s linear infinite;
+      filter: blur(1px);
+    }
 
-.twinkling {
-  background: url('https://i.imgur.com/3jK5n7w.png') repeat;
-  animation: moveTwinkling 100s linear infinite;
-  filter: blur(1px);
-}
+    .twinkling {
+      background: url('https://i.imgur.com/3jK5n7w.png') repeat;
+      animation: moveTwinkling 100s linear infinite;
+      filter: blur(1px);
+    }
 
-.moon {
-  background: url('https://i.imgur.com/kq2VYKP.png') no-repeat;
-  background-size: 150px;
-  width: 150px;
-  height: 150px;
-  top: 30px;
-  right: 30px;
-  left: auto;
-  z-index: 0;
-  animation: floatMoon 10s ease-in-out infinite alternate;
-  filter: drop-shadow(0 0 15px #ffffffcc);
-}
+    .moon {
+      background: url('https://i.imgur.com/kq2VYKP.png') no-repeat;
+      background-size: 150px;
+      width: 150px;
+      height: 150px;
+      top: 30px;
+      right: 30px;
+      left: auto;
+      z-index: 0;
+      animation: floatMoon 10s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 15px #ffffffcc);
+    }
 
-h1 {
-  text-align: center;
-  font-size: 28px;
-  margin: 20px 10px;
-  animation: slideIn 1.2s ease-in-out;
-  color: #ffb3d9;
-  text-shadow: 0 0 8px #ff80ab, 0 0 20px #ffc0cb;
-}
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      margin: 20px 10px;
+      animation: slideIn 1.2s ease-in-out;
+      color: #ffb3d9;
+      text-shadow: 0 0 8px #ff80ab, 0 0 20px #ffc0cb;
+    }
 
-.photo {
-  width: 95%;
-  max-width: 400px;
-  border-radius: 20px;
-  box-shadow: 0 0 25px rgba(255,255,255,0.3), 0 0 10px #ff80ab;
-  margin: 20px 0;
-  animation: zoomIn 1.2s ease-in-out;
-}
+    .photo {
+      width: 95%;
+      max-width: 400px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(255,255,255,0.3), 0 0 10px #ff80ab;
+      margin: 20px 0;
+      animation: zoomIn 1.2s ease-in-out;
+    }
 
-.message {
-  background: rgba(255, 240, 246, 0.85);
-  color: #4a1c32;
-  border-radius: 15px;
-  padding: 20px;
-  width: 95%;
-  max-width: 600px;
-  text-align: center;
-  box-shadow: 0 0 15px rgba(255,182,193,0.2);
-  animation: fadeInUp 1.4s ease-in-out;
-}
+    .message {
+      background: rgba(255, 240, 246, 0.85);
+      color: #4a1c32;
+      border-radius: 15px;
+      padding: 20px;
+      width: 95%;
+      max-width: 600px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(255,182,193,0.2);
+      animation: fadeInUp 1.4s ease-in-out;
+    }
 
-.signature {
-  margin-top: 15px;
-  font-weight: bold;
-  font-style: italic;
-  font-size: 18px;
-  text-shadow: 0 0 5px #ff80ab;
-}
+    .signature {
+      margin-top: 15px;
+      font-weight: bold;
+      font-style: italic;
+      font-size: 18px;
+      text-shadow: 0 0 5px #ff80ab;
+    }
 
-.emotional {
-  margin-top: 20px;
-  font-size: 16px;
-  color: #ffe6f0;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 10px 15px;
-  border-radius: 12px;
-  text-align: center;
-  max-width: 90%;
-  backdrop-filter: blur(5px);
-  box-shadow: 0 0 10px rgba(255,192,203,0.3);
-  text-shadow: 0 0 4px #ffc0cb;
-}
+    .emotional {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #ffe6f0;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px 15px;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 90%;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 0 10px rgba(255,192,203,0.3);
+      text-shadow: 0 0 4px #ffc0cb;
+    }
+
+    audio {
+      margin-top: 20px;
+    }
+
+    /* Animations */
+    @keyframes moveStars {
+      from { background-position: 0 0; }
+      to { background-position: -10000px 5000px; }
+    }
+
+    @keyframes moveTwinkling {
+      from { background-position: 0 0; }
+      to { background-position: 10000px 0; }
+    }
+
+    @keyframes floatMoon {
+      from { transform: translateY(0); }
+      to { transform: translateY(20px); }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(-100px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Mobile optimization */
+    @media screen and (max-width: 480px) {
+      h1 { font-size: 22px; }
+      .message { padding: 15px; font-size: 14px; }
+      .signature { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+  <div class="twinkling"></div>
+  <div class="moon"></div>
+
+  <div class="container">
+    <div class="password-box">
+      <h2>Enter Password to Continue</h2>
+      <input type="password" id="passwordInput" placeholder="Enter password" />
+      <br />
+      <button onclick="checkPassword()">Unlock</button>
+    </div>
+
+    <div id="content">
+      <h1>I lovee youu sooo muchh betttaa</h1>
+      <img src="Photo1.jpg" alt="Uski yaad" class="photo" />
+      <div class="message">
+        <p>Hi Betta,</p>
+        <p>Shayad tu naraz hai... door hai... lekin tu meri duniya hai. Tere bina har din adhoora lagta hai. Main chahta hoon ki tu wapas aaye, aur phir kabhi na jaaye.</p>
+        <p>Tu sirf meri nahi... meri jaan hai. Tu meri muskurahat, meri har dua ka jawab hai. Betta, main humesha tera sath chahta hoon.</p>
+        <p>Har pal main tujhme jeeta hoon... aur har lamha tujhe yaad karta hoon. Mujhe maaf kar de agar kabhi dukh diya ho, lekin itna toh jaane – main tujhe dil se, bina kisi shart ke pyaar karta hoon.</p>
+        <div class="signature">Your Betuuu</div>
+      </div>
+      <img src="Photo2.jpg" alt="Tum dono" class="photo" />
+
+      <div class="emotional">
+        I miss you so much betta... please wapas aa ja... tera Betuuu bina tere adhura hai.
+      </div>
+
+      <audio id="bg-music" loop autoplay>
+        <source src="Meherbaan_intro.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </div>
+
+  <script>
+    function checkPassword() {
+      const input = document.getElementById("passwordInput").value;
+      if (input === "7709826839") {
+        document.querySelector(".password-box").style.display = "none";
+        const content = document.getElementById("content");
+        content.style.display = "flex";
+        document.getElementById("bg-music").play();
+      } else {
+        alert("Wrong password. Try again.");
+      }
+    }
+  </script>
+</body>
+</html>
