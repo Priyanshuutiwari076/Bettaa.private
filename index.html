@@ -1,199 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Private - Betta Ke Liye</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For My Betta</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #fce4ec;
+      padding: 0;
       background: url('bg.jpg') no-repeat center center fixed;
       background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
       overflow-x: hidden;
     }
 
     .overlay {
-      backdrop-filter: blur(2px);
+      background-color: rgba(0, 0, 0, 0.7);
       min-height: 100vh;
-      width: 100%;
+      padding: 20px;
+    }
+
+    .password-container {
       display: flex;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      align-items: center;
-      flex-direction: column;
+      min-height: 100vh;
     }
 
-    .password-box {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 30px;
-      border-radius: 20px;
-      text-align: center;
-      box-shadow: 0 0 20px #fff5;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    .password-box input[type="password"] {
-      padding: 10px;
-      border-radius: 10px;
+    input[type="password"] {
+      padding: 12px;
       border: none;
-      width: 200px;
+      border-radius: 8px;
+      font-size: 16px;
+      margin-bottom: 10px;
+      outline: none;
     }
 
-    .password-box button {
-      margin-top: 15px;
-      padding: 10px 25px;
-      background-color: #e91e63;
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background-color: #ff69b4;
       color: white;
-      border: none;
-      border-radius: 10px;
+      font-size: 16px;
       cursor: pointer;
-      font-weight: bold;
     }
 
-    #content {
+    .hidden-content {
       display: none;
-      flex-direction: column;
-      align-items: center;
       text-align: center;
       padding: 20px;
     }
 
-    .heart {
+    .reveal-btn {
       font-size: 50px;
-      cursor: pointer;
-      animation: pulse 2s infinite;
-      margin-top: 30px;
-      color: #ff80ab;
-      text-shadow: 0 0 15px #ff99c9;
-    }
-
-    .hidden-section {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      animation: fadeInUp 1.5s ease-in-out;
-    }
-
-    h1 {
-      font-size: 26px;
       color: #ffb3d9;
-      text-shadow: 0 0 10px #ff80ab;
+      cursor: pointer;
+      animation: bounceGlow 2s infinite;
+      margin-top: 40px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .reveal-btn:hover {
+      transform: scale(1.1);
+      text-shadow: 0 0 10px #fff, 0 0 20px #ff80ab;
+    }
+
+    @keyframes bounceGlow {
+      0%   { transform: translateY(0); text-shadow: 0 0 10px #fff; }
+      50%  { transform: translateY(-8px); text-shadow: 0 0 20px #ff80ab, 0 0 40px #ffc0cb; }
+      100% { transform: translateY(0); text-shadow: 0 0 10px #fff; }
     }
 
     .photo {
-      width: 90%;
-      max-width: 400px;
-      border-radius: 20px;
-      box-shadow: 0 0 25px rgba(255,255,255,0.3), 0 0 10px #ff80ab;
-      margin: 20px 0;
+      max-width: 90%;
+      margin: 20px auto;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(255, 192, 203, 0.6);
     }
 
     .message {
-      background: rgba(255, 240, 246, 0.85);
-      color: #4a1c32;
-      border-radius: 15px;
-      padding: 20px;
-      max-width: 600px;
-      box-shadow: 0 0 15px rgba(255,182,193,0.2);
-    }
-
-    .signature {
-      margin-top: 15px;
-      font-weight: bold;
-      font-style: italic;
-      font-size: 18px;
-      text-shadow: 0 0 5px #ff80ab;
-    }
-
-    .emotional {
+      font-size: 20px;
       margin-top: 20px;
-      font-size: 16px;
-      color: #ffe6f0;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 10px 15px;
-      border-radius: 12px;
-      backdrop-filter: blur(5px);
-      box-shadow: 0 0 10px rgba(255,192,203,0.3);
-      text-shadow: 0 0 4px #ffc0cb;
+      line-height: 1.6;
     }
 
-    audio {
-      margin-top: 20px;
+    .emoji {
+      font-size: 24px;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+    @media only screen and (max-width: 600px) {
+      .message {
+        font-size: 18px;
+      }
 
-    @keyframes fadeInUp {
-      from { transform: translateY(40px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
-    }
-
-    @media screen and (max-width: 480px) {
-      h1 { font-size: 22px; }
-      .message { font-size: 14px; }
+      .reveal-btn {
+        font-size: 40px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="overlay">
-    <div class="password-box" id="passwordBox">
-      <h2>Enter Password to Continue</h2>
-      <input type="password" id="passwordInput" placeholder="Enter password" />
-      <br />
+    <div id="passwordSection" class="password-container">
+      <h2>Enter Password to Unlock</h2>
+      <input type="password" id="passwordInput" placeholder="Password...">
       <button onclick="checkPassword()">Unlock</button>
     </div>
 
-    <div id="content">
-      <div class="heart" onclick="revealContent()">❤️</div>
+    <div id="mainContent" class="hidden-content">
+      <div class="reveal-btn" onclick="revealContent()" title="Click to Open">
+        ❤️
+        <div style="font-size: 16px; margin-top: 5px;">Click to Open</div>
+      </div>
 
-      <div class="hidden-section" id="hiddenSection">
-        <h1>I lovee youu so muchh bettaaa 💕♾️</h1>
-        <img src="photo1.jpg" alt="Memory 1" class="photo" />
-
+      <div id="revealedContent" style="display:none;">
+        <img src="photo.jpg" alt="Us" class="photo">
         <div class="message">
-          <p>Hi Betta 💖</p>
-          <p>Shayad tu naraz hai... door hai... lekin tu meri duniya hai 🌍. Tere bina har din adhoora lagta hai 🥺. Main chahta hoon ki tu wapas aaye, aur phir kabhi na jaaye 🌙.</p>
-          <p>Tu sirf meri nahi... meri jaan hai ❤️. Tu meri muskurahat, meri har dua ka jawab hai ✨. Main humesha tera sath chahta hoon 🤝.</p>
-          <p>Har pal main tujhme jeeta hoon... aur har lamha tujhe yaad karta hoon 💭. Mujhe maaf kar de agar kabhi dukh diya ho, lekin itna toh jaane – main tujhe dil se, bina kisi shart ke pyaar karta hoon 💞.</p>
-          <div class="signature">— Tera Betuuu 🐻</div>
+          I miss you so much betttaa 💭💗<br>
+          Jaldii aajaaa na please...<br><br>
+          I lovee youu so muchh bettaaa 💕♾️<br>
+          Hamesha saath rahunga... no matter what happens.
         </div>
-
-        <img src="photo2.jpg" alt="Memory 2" class="photo" />
-        <div class="emotional">I miss you so much betttaa 😢 jldii aajaaa 🫂💗</div>
-
-        <audio id="bg-music" loop>
-          <source src="Meherbaan_intro.mp3" type="audio/mpeg" />
-          Your browser does not support the audio element.
-        </audio>
       </div>
     </div>
+
+    <audio id="bgMusic" loop>
+      <source src="music.mp3" type="audio/mpeg">
+    </audio>
   </div>
 
   <script>
+    const correctPassword = "yourpassword"; // Change this
+
     function checkPassword() {
-      const input = document.getElementById("passwordInput").value;
-      if (input === "7709826839") {
-        document.getElementById("passwordBox").style.display = "none";
-        document.getElementById("content").style.display = "flex";
+      const input = document.getElementById('passwordInput').value;
+      if (input === correctPassword) {
+        document.getElementById('passwordSection').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+        document.getElementById('bgMusic').play();
       } else {
-        alert("Wrong password. Try again.");
+        alert("Wrong password, try again!");
       }
     }
 
     function revealContent() {
-      const section = document.getElementById("hiddenSection");
-      section.style.display = "flex";
-      document.getElementById("bg-music").play();
+      document.getElementById('revealedContent').style.display = 'block';
     }
   </script>
 </body>
