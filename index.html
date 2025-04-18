@@ -273,4 +273,94 @@
       <button id="unlockButton">Unlock</button>
     </div>
 
-    <!--
+    <!-- Heart Animation Container -->
+    <div class="heart-container" id="heartContainer">
+      <div class="heart" onclick="revealContent()"></div>
+    </div>
+
+    <div id="content">
+      <h1>I lovee youu sooo muchh betttaa 💕</h1>
+      <img src="Photo1.jpg" alt="Uski yaad" class="photo" />
+      <div class="message">
+        <p>Hi Betta 💕,</p>
+        <p>Shayad tu naraz hai... door hai... lekin tu meri duniya hai 🌎. Tere bina har din adhoora lagta hai. Main chahta hoon ki tu wapas aaye, aur phir kabhi na jaaye ♾️.</p>
+        <p>Tu sirf meri nahi... meri jaan hai ❤️. Tu meri muskurahat, meri har dua ka jawab hai. Betta, main humesha tera sath chahta hoon 🫂.</p>
+        <p>Har pal main tujhme jeeta hoon... aur har lamha tujhe yaad karta hoon. Mujhe maaf kar de agar kabhi dukh diya ho 🧿, lekin itna toh jaane – main tujhe dil se, bina kisi shart ke pyaar karta hoon 💕.</p>
+        <p>I miss you so muchh betta 💕🫂 jaldi waps aaja.</p>
+        <div class="signature">Your Betuuu 💕</div>
+      </div>
+      <img src="Photo2.jpg" alt="Tum dono" class="photo" />
+      <audio id="bg-music" controls loop>
+        <source src="Meherbaan_intro.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </div>
+
+  <script>
+    window.onload = function () {
+      console.log("Page loaded, script initialized");
+
+      // Check if elements exist
+      const input = document.getElementById("passwordInput");
+      const passwordBox = document.getElementById("passwordBox");
+      const heartContainer = document.getElementById("heartContainer");
+      const content = document.getElementById("content");
+      const music = document.getElementById("bg-music");
+      const unlockButton = document.getElementById("unlockButton");
+
+      if (!input || !passwordBox || !heartContainer || !content || !music || !unlockButton) {
+        console.error("Error: One or more elements not found");
+        alert("Error: Page elements missing. Please check console or refresh the page.");
+        return;
+      }
+
+      // Password check function
+      function checkPassword() {
+        console.log("checkPassword called");
+        const password = input.value.trim();
+        console.log("Entered password:", password);
+        const correctPassword = "7498886839";
+
+        if (password === correctPassword) {
+          console.log("Password correct, showing heart animation...");
+          passwordBox.style.display = "none";
+          heartContainer.style.display = "flex";
+        } else {
+          console.log("Wrong password");
+          alert("Wrong password. Try again.");
+          input.value = "";
+          input.classList.add("shake");
+          setTimeout(() => input.classList.remove("shake"), 500);
+          input.focus();
+        }
+      }
+
+      // Reveal content after heart click
+      window.revealContent = function () {
+        console.log("Heart clicked, revealing content...");
+        heartContainer.style.display = "none";
+        content.style.display = "flex";
+        music.play().catch((e) => {
+          console.warn("Audio play failed:", e);
+          alert("Audio couldn't play automatically. Use the audio controls.");
+        });
+      };
+
+      // Button click
+      unlockButton.onclick = checkPassword;
+
+      // Enter key
+      input.addEventListener("keypress", (e) => {
+        console.log("Key pressed:", e.key);
+        if (e.key === "Enter") {
+          e.preventDefault();
+          checkPassword();
+        }
+      });
+
+      console.log("Script setup complete, ready for password input");
+    };
+  </script>
+</body>
+</html>
